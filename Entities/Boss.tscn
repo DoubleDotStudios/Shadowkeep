@@ -13,5 +13,9 @@ debug_enabled = true
 [node name="DamageComponent" type="Area2D" parent="."]
 script = ExtResource("2_275vi")
 
+[node name="DamageComponent2" type="Area2D" parent="." node_paths=PackedStringArray("health")]
+script = ExtResource("2_275vi")
+health = NodePath("../HealthComponent")
+
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("3_cb4h3")

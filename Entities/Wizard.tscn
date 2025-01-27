@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://ctx4dlgtqu5w4"]
+[gd_scene load_steps=7 format=3 uid="uid://ctx4dlgtqu5w4"]
 
 [ext_resource type="PackedScene" uid="uid://c4adfq4qvryfm" path="res://Entities/Boss.tscn" id="1_ijnu1"]
 [ext_resource type="Texture2D" uid="uid://bk1l3xnodcv3y" path="res://icon.svg" id="2_4xhl4"]
@@ -10,6 +10,9 @@ size = Vector2(16, 16)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ahyx5"]
 size = Vector2(18, 18)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lcwqr"]
+size = Vector2(16, 16)
+
 [node name="Wizard" instance=ExtResource("1_ijnu1")]
 script = ExtResource("2_5dpy4")
 
@@ -20,16 +23,19 @@ texture = ExtResource("2_4xhl4")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
 shape = SubResource("RectangleShape2D_0l82c")
 
-[node name="DamageComponent" parent="." index="3" node_paths=PackedStringArray("health")]
-health = NodePath("../HealthComponent")
+[node name="DamageComponent" parent="." index="3"]
 type = "Hit"
 damage = 1
 
 [node name="AreaShape" type="CollisionShape2D" parent="DamageComponent" index="0"]
 shape = SubResource("RectangleShape2D_ahyx5")
 
-[node name="HealthComponent" parent="." index="4"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageComponent2" index="0"]
+shape = SubResource("RectangleShape2D_lcwqr")
+
+[node name="HealthComponent" parent="." index="5"]
 hp = 10
 
 [connection signal="attacked" from="DamageComponent" to="." method="_on_damage_component_attacked"]
+[connection signal="damaged" from="DamageComponent2" to="." method="_on_damage_component_2_damaged"]
 [connection signal="defeat" from="HealthComponent" to="." method="_on_health_component_defeat"]

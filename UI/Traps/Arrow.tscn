@@ -1,35 +1,35 @@
 [gd_scene load_steps=5 format=3 uid="uid://d33ybn7vb0odk"]
 
 [ext_resource type="Script" path="res://UI/Traps/Arrow.gd" id="1_obmpe"]
-[ext_resource type="Script" path="res://Components/DamageComponent.gd" id="1_wum1x"]
 [ext_resource type="Texture2D" uid="uid://popx14p3yawe" path="res://Assets/Booby Traps.png" id="2_3ybgk"]
+[ext_resource type="PackedScene" uid="uid://cjeq3cu7owbp3" path="res://Components/Damage Component.tscn" id="3_cnkw4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a8fyh"]
-size = Vector2(8, 13)
+size = Vector2(8, 12)
 
 [node name="Arrow" type="CharacterBody2D"]
-position = Vector2(0, 0.5)
 script = ExtResource("1_obmpe")
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, 2.38419e-07)
-scale = Vector2(1, 1.06667)
+position = Vector2(4, -2.38418e-07)
 texture = ExtResource("2_3ybgk")
 region_enabled = true
-region_rect = Rect2(0, 0, 16, 15)
+region_rect = Rect2(0, 0, 16, 16)
 
-[node name="DamageComponent" type="Area2D" parent="."]
-script = ExtResource("1_wum1x")
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(4, -4.76837e-07)
+scale = Vector2(0.8, 0.6)
+
+[node name="DamageComponent" parent="." instance=ExtResource("3_cnkw4")]
+monitoring = false
 type = "Hit"
 damage = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageComponent"]
-position = Vector2(-4, 0.5)
+position = Vector2(0, -4.76837e-07)
 shape = SubResource("RectangleShape2D_a8fyh")
 
-[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-position = Vector2(0, 0.5)
-scale = Vector2(0.8, 0.65)
-
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="attacked" from="DamageComponent" to="." method="_on_damage_component_attacked"]
+[connection signal="body_entered" from="DamageComponent" to="." method="_on_damage_component_body_entered"]

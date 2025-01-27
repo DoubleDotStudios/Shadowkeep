@@ -18,7 +18,7 @@ var usable: bool = true
 func _ready() -> void:
 	dir = directionToVec(direction)
 
-func directionToVec(dir: Direction):
+func directionToVec(direction: Direction):
 	match direction:
 		Direction.Up: return Vector2(0, -1)
 		Direction.Left: return Vector2(-1, 0)
@@ -42,4 +42,5 @@ func _on_pressed() -> void:
 		await timer.timeout
 		$Disabled.visible = false
 		
+		timer.queue_free()
 		usable = true

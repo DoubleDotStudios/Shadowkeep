@@ -8,38 +8,38 @@ func _ready() -> void:
 	nav.target_position = adventurer.global_position
 	self.state = State.Chase
 
-func _process(delta: float) -> void:
-	if self.state == State.Defeat:
-		queue_free()
-	
-	if self.state == State.Chase:
-		coll.set_deferred("disabled", false)
-		
-		var currPos: Vector2 = global_position
-		var nextPos: Vector2 = nav.get_next_path_position()
-		
-		nav.target_position = adventurer.global_position
-		
-		velocity = currPos.direction_to(nextPos) * speed * delta
-		
-		move_and_slide()
-	elif self.state == State.Wait:
-		coll.set_deferred("disabled", true)
-		nav.target_position = Vector2.ZERO
-	elif self.state == State.Hit:
-		if nav.target_reached:
-			self.state = State.Chase
-		
-		coll.set_deferred("disabled", true)
-		$DamageComponent/AreaShape.set_deferred("disabled", true)
-		runAway()
-		
-		var currPos: Vector2 = global_position
-		var nextPos: Vector2 = nav.get_next_path_position()
-		
-		velocity = currPos.direction_to(nextPos) * speed * delta
-		
-		move_and_slide()
+#func _physics_process(delta: float) -> void:
+	#if self.state == State.Defeat:
+		#queue_free()
+	#
+	#if self.state == State.Chase:
+		#coll.set_deferred("disabled", false)
+		#
+		#var currPos: Vector2 = global_position
+		#var nextPos: Vector2 = nav.get_next_path_position()
+		#
+		#nav.target_position = adventurer.global_position
+		#
+		#velocity = currPos.direction_to(nextPos) * speed * delta
+		#
+		#move_and_slide()
+	#elif self.state == State.Wait:
+		#coll.set_deferred("disabled", true)
+		#nav.target_position = Vector2.ZERO
+	#elif self.state == State.Hit:
+		#if nav.target_reached:
+			#self.state = State.Chase
+		#
+		#coll.set_deferred("disabled", true)
+		#$DamageComponent/AreaShape.set_deferred("disabled", true)
+		#runAway()
+		#
+		#var currPos: Vector2 = global_position
+		#var nextPos: Vector2 = nav.get_next_path_position()
+		#
+		#velocity = currPos.direction_to(nextPos) * speed * delta
+		#
+		#move_and_slide()
 
 func _on_damage_component_attacked() -> void:
 	self.state = State.Hit
@@ -55,3 +55,7 @@ func runAway() -> void:
 
 func _on_health_component_defeat() -> void:
 	self.state = State.Defeat
+
+
+func _on_damage_component_2_damaged() -> void:
+	queue_free()

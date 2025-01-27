@@ -137,15 +137,6 @@ func _on_far_body_exited(body: Node2D) -> void:
 
 
 func _on_damage_component_damaged() -> void:
-	print($"Health Component".hp)
-	
-	var timer: Timer = Timer.new()
-	add_child(timer)
-	$CollisionShape2D.set_deferred("disabled", true)
-	$"Damage Component/CollisionShape2D".set_deferred("disabled", true)
-	
-	timer.start(1.5)
-	await timer.timeout
-	
-	$CollisionShape2D.set_deferred("disabled", false)
-	$"Damage Component/CollisionShape2D".set_deferred("disabled", false)
+	$AnimationTree.active = false
+	$AnimationPlayer.call_deferred("play", "Hit")
+	$AnimationTree.active = true

@@ -94,7 +94,7 @@ tile_set = SubResource("TileSet_gm5x8")
 metadata/_edit_lock_ = true
 
 [node name="Adventurer" parent="." node_paths=PackedStringArray("area") instance=ExtResource("2_ns6fk")]
-position = Vector2(60, 66)
+position = Vector2(40, 56)
 area = NodePath("../NavigationRegion2D")
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
