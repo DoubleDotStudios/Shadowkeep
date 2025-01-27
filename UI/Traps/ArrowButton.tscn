@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://ch62wf0ryym47"]
+
+[ext_resource type="PackedScene" uid="uid://5l0blnsxbtcl" path="res://UI/Button.tscn" id="1_5ffah"]
+[ext_resource type="Script" path="res://UI/Traps/ArrowButton.gd" id="2_7l628"]
+[ext_resource type="Texture2D" uid="uid://popx14p3yawe" path="res://Assets/Booby Traps.png" id="3_mkvnq"]
+
+[node name="ArrowButton" instance=ExtResource("1_5ffah")]
+script = ExtResource("2_7l628")
+direction = 2
+
+[node name="TextureRect" type="Sprite2D" parent="Inactive" index="0"]
+position = Vector2(3, 3)
+scale = Vector2(0.625, 0.625)
+texture = ExtResource("3_mkvnq")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 16, 16, 16)
+
+[node name="TextureRect2" type="Sprite2D" parent="Active" index="0"]
+position = Vector2(3, 3)
+scale = Vector2(0.625, 0.625)
+texture = ExtResource("3_mkvnq")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 32, 16, 16)
+
+[node name="FirePoint" type="Node2D" parent="." index="2"]
+position = Vector2(8, 8)
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

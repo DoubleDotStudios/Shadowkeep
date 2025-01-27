@@ -1,0 +1,261 @@
+[gd_scene load_steps=21 format=3 uid="uid://b7grmostp8h6d"]
+
+[ext_resource type="Texture2D" uid="uid://xtp7unj38d63" path="res://Assets/Young Adventurers.png" id="1_77dl7"]
+[ext_resource type="Script" path="res://Entities/Adventurer.gd" id="1_k7oeu"]
+[ext_resource type="PackedScene" uid="uid://iftaexnxkd4" path="res://Components/Health Component.tscn" id="3_xxriy"]
+[ext_resource type="PackedScene" uid="uid://cjeq3cu7owbp3" path="res://Components/Damage Component.tscn" id="4_qurqu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s5pqi"]
+size = Vector2(16, 16)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_asl0v"]
+radius = 13.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_iifo5"]
+radius = 24.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_r23im"]
+radius = 35.0143
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_thys0"]
+size = Vector2(17, 17)
+
+[sub_resource type="Animation" id="Animation_6uvl6"]
+resource_name = "Idle"
+length = 2.0
+loop_mode = 1
+step = 1.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.05, 1.05), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_vyuh2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_jnf4m"]
+resource_name = "Run"
+length = 0.4
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0698132, -0.0698132, 0.0698132]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_vk4ch"]
+resource_name = "Sprint"
+length = 0.2
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0872665, -0.0872665, 0.0872665]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_oxvr1"]
+resource_name = "Walk"
+length = 0.6
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0523599, -0.0523599, 0.0523599]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bvv7m"]
+_data = {
+"Idle": SubResource("Animation_6uvl6"),
+"RESET": SubResource("Animation_vyuh2"),
+"Run": SubResource("Animation_jnf4m"),
+"Sprint": SubResource("Animation_vk4ch"),
+"Walk": SubResource("Animation_oxvr1")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_75p2y"]
+animation = &"Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_kd242"]
+animation = &"Walk"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_igjd8"]
+animation = &"Run"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_j7hth"]
+animation = &"Sprint"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_k077m"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_75p2y")
+blend_point_0/pos = -1.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_kd242")
+blend_point_1/pos = -0.39
+blend_point_2/node = SubResource("AnimationNodeAnimation_igjd8")
+blend_point_2/pos = 0.39
+blend_point_3/node = SubResource("AnimationNodeAnimation_j7hth")
+blend_point_3/pos = 1.0
+snap = 0.13
+
+[node name="Adventurer" type="CharacterBody2D" groups=["Player"]]
+script = ExtResource("1_k7oeu")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_77dl7")
+hframes = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_s5pqi")
+
+[node name="Agent" type="NavigationAgent2D" parent="."]
+avoidance_enabled = true
+debug_enabled = true
+
+[node name="Ranges" type="Node2D" parent="."]
+visible = false
+
+[node name="Close" type="Area2D" parent="Ranges"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ranges/Close"]
+shape = SubResource("CircleShape2D_asl0v")
+
+[node name="Medium" type="Area2D" parent="Ranges"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ranges/Medium"]
+shape = SubResource("CircleShape2D_iifo5")
+
+[node name="Far" type="Area2D" parent="Ranges"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ranges/Far"]
+shape = SubResource("CircleShape2D_r23im")
+
+[node name="Health Component" parent="." instance=ExtResource("3_xxriy")]
+hp = 10
+
+[node name="Damage Component" parent="." node_paths=PackedStringArray("health") instance=ExtResource("4_qurqu")]
+health = NodePath("../Health Component")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Damage Component"]
+shape = SubResource("RectangleShape2D_thys0")
+debug_color = Color(0.995237, 0, 0.208747, 0.42)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_bvv7m")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+active = false
+tree_root = SubResource("AnimationNodeBlendSpace1D_k077m")
+anim_player = NodePath("../AnimationPlayer")
+parameters/blend_position = 0.0853122
+
+[connection signal="body_entered" from="Ranges/Close" to="." method="_on_close_body_entered"]
+[connection signal="body_exited" from="Ranges/Close" to="." method="_on_close_body_exited"]
+[connection signal="body_entered" from="Ranges/Medium" to="." method="_on_medium_body_entered"]
+[connection signal="body_exited" from="Ranges/Medium" to="." method="_on_medium_body_exited"]
+[connection signal="body_entered" from="Ranges/Far" to="." method="_on_far_body_entered"]
+[connection signal="body_exited" from="Ranges/Far" to="." method="_on_far_body_exited"]
+[connection signal="damaged" from="Damage Component" to="." method="_on_damage_component_damaged"]

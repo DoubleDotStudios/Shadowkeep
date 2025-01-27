@@ -1,0 +1,63 @@
+[gd_scene load_steps=4 format=3 uid="uid://5l0blnsxbtcl"]
+
+[ext_resource type="StyleBox" uid="uid://b4s6tgyaxwlsw" path="res://UI/ButtonStyle.tres" id="1_822bq"]
+[ext_resource type="Script" path="res://UI/MenuButton.gd" id="1_bghu6"]
+[ext_resource type="Texture2D" uid="uid://ejf2fl26jmia" path="res://Assets/Dungeon UI.png" id="1_wp27q"]
+
+[node name="Button" type="Button"]
+offset_right = 16.0
+offset_bottom = 16.0
+theme_override_styles/focus = ExtResource("1_822bq")
+theme_override_styles/disabled_mirrored = ExtResource("1_822bq")
+theme_override_styles/disabled = ExtResource("1_822bq")
+theme_override_styles/hover_pressed_mirrored = ExtResource("1_822bq")
+theme_override_styles/hover_pressed = ExtResource("1_822bq")
+theme_override_styles/hover_mirrored = ExtResource("1_822bq")
+theme_override_styles/hover = ExtResource("1_822bq")
+theme_override_styles/pressed_mirrored = ExtResource("1_822bq")
+theme_override_styles/pressed = ExtResource("1_822bq")
+theme_override_styles/normal_mirrored = ExtResource("1_822bq")
+theme_override_styles/normal = ExtResource("1_822bq")
+flat = true
+script = ExtResource("1_bghu6")
+metadata/_edit_group_ = true
+
+[node name="Inactive" type="NinePatchRect" parent="."]
+layout_mode = 0
+offset_right = 16.0
+offset_bottom = 16.0
+texture = ExtResource("1_wp27q")
+region_rect = Rect2(32, 0, 16, 16)
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="Active" type="NinePatchRect" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 16.0
+offset_bottom = 16.0
+texture = ExtResource("1_wp27q")
+region_rect = Rect2(0, 16, 16, 16)
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="Disabled" type="NinePatchRect" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 16.0
+offset_bottom = 16.0
+texture = ExtResource("1_wp27q")
+region_rect = Rect2(16, 16, 16, 16)
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[connection signal="button_down" from="." to="." method="_on_button_down"]
+[connection signal="button_up" from="." to="." method="_on_button_up"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
