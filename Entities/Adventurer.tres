@@ -1,0 +1,38 @@
+[gd_resource type="ShaderMaterial" load_steps=6 format=3 uid="uid://63afn3e50yg0"]
+
+[ext_resource type="Shader" path="res://Entities/Adventurer.gdshader" id="1_0o8at"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_mrmlx"]
+noise_type = 0
+seed = 75
+frequency = 0.5
+fractal_type = 0
+fractal_octaves = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_orvnp"]
+width = 16
+height = 16
+generate_mipmaps = false
+normalize = false
+noise = SubResource("FastNoiseLite_mrmlx")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_yrvql"]
+noise_type = 0
+frequency = 0.5
+fractal_octaves = 3
+fractal_gain = 1.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_e68r8"]
+width = 16
+height = 16
+generate_mipmaps = false
+as_normal_map = true
+normalize = false
+noise = SubResource("FastNoiseLite_yrvql")
+
+[resource]
+shader = ExtResource("1_0o8at")
+shader_parameter/progress = 0.0
+shader_parameter/strength = 1.0
+shader_parameter/noise_tex_normal = SubResource("NoiseTexture2D_e68r8")
+shader_parameter/noise_tex = SubResource("NoiseTexture2D_orvnp")
