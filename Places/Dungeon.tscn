@@ -389,7 +389,6 @@ position = Vector2(224, 520)
 navigation_polygon = SubResource("NavigationPolygon_qchly")
 
 [node name="Adventurer" parent="." instance=ExtResource("3_prfqs")]
-modulate = Color(1, 1, 1, 1)
 position = Vector2(-8, 8)
 speed_mod = 1.35
 
