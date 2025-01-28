@@ -1,0 +1,184 @@
+[gd_scene load_steps=5 format=3 uid="uid://83po1v5huom7"]
+
+[ext_resource type="Script" path="res://UI/MenuButton.gd" id="1_01h32"]
+[ext_resource type="Script" path="res://Places/mainMenu.gd" id="1_ewdqq"]
+[ext_resource type="StyleBox" uid="uid://b4s6tgyaxwlsw" path="res://UI/ButtonStyle.tres" id="1_mkumx"]
+[ext_resource type="Texture2D" uid="uid://ejf2fl26jmia" path="res://Assets/Dungeon UI.png" id="1_wada8"]
+
+[node name="Main Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ewdqq")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0941176, 0.0941176, 0.145098, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+alignment = 1
+
+[node name="HSeparator2" type="HSeparator" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 150
+theme_override_styles/separator = ExtResource("1_mkumx")
+
+[node name="Start" type="Button" parent="HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(412, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/focus = ExtResource("1_mkumx")
+theme_override_styles/disabled_mirrored = ExtResource("1_mkumx")
+theme_override_styles/disabled = ExtResource("1_mkumx")
+theme_override_styles/hover_pressed_mirrored = ExtResource("1_mkumx")
+theme_override_styles/hover_pressed = ExtResource("1_mkumx")
+theme_override_styles/hover_mirrored = ExtResource("1_mkumx")
+theme_override_styles/hover = ExtResource("1_mkumx")
+theme_override_styles/pressed_mirrored = ExtResource("1_mkumx")
+theme_override_styles/pressed = ExtResource("1_mkumx")
+theme_override_styles/normal_mirrored = ExtResource("1_mkumx")
+theme_override_styles/normal = ExtResource("1_mkumx")
+text = "Start"
+flat = true
+script = ExtResource("1_01h32")
+metadata/_edit_group_ = true
+
+[node name="Inactive" type="NinePatchRect" parent="HBoxContainer/VBoxContainer/Start"]
+offset_right = 412.0
+offset_bottom = 100.0
+texture = ExtResource("1_wada8")
+region_rect = Rect2(32, 0, 16, 16)
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/Start/Inactive"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 410.0
+offset_bottom = 98.0
+theme_override_font_sizes/font_size = 64
+text = "Start"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Active" type="NinePatchRect" parent="HBoxContainer/VBoxContainer/Start"]
+visible = false
+offset_right = 412.0
+offset_bottom = 100.0
+texture = ExtResource("1_wada8")
+region_rect = Rect2(0, 16, 16, 16)
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="Label2" type="Label" parent="HBoxContainer/VBoxContainer/Start/Active"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 410.0
+offset_bottom = 98.0
+theme_override_font_sizes/font_size = 64
+text = "Start"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 64
+theme_override_styles/separator = ExtResource("1_mkumx")
+
+[node name="Quit" type="Button" parent="HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(412, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/focus = ExtResource("1_mkumx")
+theme_override_styles/disabled_mirrored = ExtResource("1_mkumx")
+theme_override_styles/disabled = ExtResource("1_mkumx")
+theme_override_styles/hover_pressed_mirrored = ExtResource("1_mkumx")
+theme_override_styles/hover_pressed = ExtResource("1_mkumx")
+theme_override_styles/hover_mirrored = ExtResource("1_mkumx")
+theme_override_styles/hover = ExtResource("1_mkumx")
+theme_override_styles/pressed_mirrored = ExtResource("1_mkumx")
+theme_override_styles/pressed = ExtResource("1_mkumx")
+theme_override_styles/normal_mirrored = ExtResource("1_mkumx")
+theme_override_styles/normal = ExtResource("1_mkumx")
+flat = true
+script = ExtResource("1_01h32")
+metadata/_edit_group_ = true
+
+[node name="Inactive" type="NinePatchRect" parent="HBoxContainer/VBoxContainer/Quit"]
+offset_right = 412.0
+offset_bottom = 100.0
+texture = ExtResource("1_wada8")
+region_rect = Rect2(32, 0, 16, 16)
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/Quit/Inactive"]
+layout_mode = 0
+offset_top = 2.0
+offset_right = 408.0
+offset_bottom = 98.0
+theme_override_font_sizes/font_size = 64
+text = "Quit"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Active" type="NinePatchRect" parent="HBoxContainer/VBoxContainer/Quit"]
+visible = false
+offset_right = 412.0
+offset_bottom = 100.0
+texture = ExtResource("1_wada8")
+region_rect = Rect2(0, 16, 16, 16)
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="Label2" type="Label" parent="HBoxContainer/VBoxContainer/Quit/Active"]
+layout_mode = 0
+offset_top = 2.0
+offset_right = 408.0
+offset_bottom = 98.0
+theme_override_font_sizes/font_size = 64
+text = "Quit"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="button_down" from="HBoxContainer/VBoxContainer/Start" to="HBoxContainer/VBoxContainer/Start" method="_on_button_down"]
+[connection signal="button_up" from="HBoxContainer/VBoxContainer/Start" to="HBoxContainer/VBoxContainer/Start" method="_on_button_up"]
+[connection signal="mouse_entered" from="HBoxContainer/VBoxContainer/Start" to="HBoxContainer/VBoxContainer/Start" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="HBoxContainer/VBoxContainer/Start" to="HBoxContainer/VBoxContainer/Start" method="_on_mouse_exited"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/Start" to="." method="_on_start_pressed"]
+[connection signal="button_down" from="HBoxContainer/VBoxContainer/Quit" to="HBoxContainer/VBoxContainer/Quit" method="_on_button_down"]
+[connection signal="button_up" from="HBoxContainer/VBoxContainer/Quit" to="HBoxContainer/VBoxContainer/Quit" method="_on_button_up"]
+[connection signal="mouse_entered" from="HBoxContainer/VBoxContainer/Quit" to="HBoxContainer/VBoxContainer/Quit" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="HBoxContainer/VBoxContainer/Quit" to="HBoxContainer/VBoxContainer/Quit" method="_on_mouse_exited"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
