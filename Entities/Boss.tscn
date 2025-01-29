@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://c4adfq4qvryfm"]
 
 [ext_resource type="Script" path="res://Entities/Boss.gd" id="1_p31dp"]
-[ext_resource type="Script" path="res://Components/DamageComponent.gd" id="2_275vi"]
+[ext_resource type="PackedScene" uid="uid://cjeq3cu7owbp3" path="res://Components/Damage Component.tscn" id="2_ce3sp"]
 [ext_resource type="Script" path="res://Components/HealthComponent.gd" id="3_cb4h3"]
 
 [node name="Boss" type="CharacterBody2D" groups=["Boss"]]
@@ -10,12 +10,13 @@ script = ExtResource("1_p31dp")
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 debug_enabled = true
 
-[node name="DamageComponent" type="Area2D" parent="."]
-script = ExtResource("2_275vi")
-
-[node name="DamageComponent2" type="Area2D" parent="." node_paths=PackedStringArray("health")]
-script = ExtResource("2_275vi")
+[node name="Hurt" parent="." node_paths=PackedStringArray("health") instance=ExtResource("2_ce3sp")]
 health = NodePath("../HealthComponent")
+
+[node name="Hit" parent="." instance=ExtResource("2_ce3sp")]
+type = "Hit"
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("3_cb4h3")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]

@@ -2,9 +2,9 @@
 
 [ext_resource type="Texture2D" uid="uid://xtp7unj38d63" path="res://Assets/Young Adventurers.png" id="1_77dl7"]
 [ext_resource type="Script" path="res://Entities/Adventurer.gd" id="1_k7oeu"]
-[ext_resource type="Material" uid="uid://63afn3e50yg0" path="res://Entities/Adventurer.tres" id="2_gcby5"]
 [ext_resource type="PackedScene" uid="uid://iftaexnxkd4" path="res://Components/Health Component.tscn" id="3_xxriy"]
 [ext_resource type="PackedScene" uid="uid://cjeq3cu7owbp3" path="res://Components/Damage Component.tscn" id="4_qurqu"]
+[ext_resource type="AudioStream" uid="uid://dllnjm7ya6qa" path="res://Sfx/Hurt.wav" id="6_wse2x"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s5pqi"]
 size = Vector2(16, 16)
@@ -24,7 +24,7 @@ size = Vector2(17, 17)
 [sub_resource type="Animation" id="Animation_ciwps"]
 resource_name = "Hit"
 length = 1.5
-step = 0.25
+step = 0.01
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -330,7 +330,6 @@ snap = 0.13
 script = ExtResource("1_k7oeu")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-material = ExtResource("2_gcby5")
 texture = ExtResource("1_77dl7")
 hframes = 4
 
@@ -379,6 +378,10 @@ active = false
 tree_root = SubResource("AnimationNodeBlendSpace1D_k077m")
 anim_player = NodePath("../AnimationPlayer")
 parameters/blend_position = 0.3088
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_wse2x")
+max_distance = 500.0
 
 [connection signal="body_entered" from="Ranges/Close" to="." method="_on_close_body_entered"]
 [connection signal="body_exited" from="Ranges/Close" to="." method="_on_close_body_exited"]

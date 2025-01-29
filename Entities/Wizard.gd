@@ -3,50 +3,63 @@ extends Boss
 @onready var coll: CollisionShape2D = $CollisionShape2D
 
 var inside: bool = false
+var see: bool = true
 
 func _ready() -> void:
+	$AnimationPlayer.play("RESET")
 	nav.target_position = adventurer.global_position
 
 func _physics_process(delta: float) -> void:
-	if self.state == State.Prepare:
-		var t = Timer.new()
-		add_child(t)
-		t.start(0.1)
-		await t.timeout
-		t.queue_free()
-		self.state = State.Chase
-	
-	if self.state == State.Defeat:
-		queue_free()
-	
-	elif self.state == State.Wait:
-		coll.set_deferred("disabled", true)
-		nav.target_position = Vector2.ZERO
-	elif self.state == State.Hit:
-		if nav.target_reached:
+	match self.state:
+		State.Prepare:
+			var t = Timer.new()
+			add_child(t)
+			t.start(0.1)
+			await t.timeout
+			t.queue_free()
 			self.state = State.Chase
 		
-		coll.set_deferred("disabled", true)
-		$DamageComponent/AreaShape.set_deferred("disabled", true)
-		runAway()
+		State.Defeat:
+			queue_free()
 		
-		var currPos: Vector2 = global_position
-		var nextPos: Vector2 = nav.get_next_path_position()
+		State.Wait:
+			coll.set_deferred("disabled", true)
+			nav.target_position = Vector2.ZERO
 		
-		velocity = currPos.direction_to(nextPos) * speed * delta
+		State.Hit:
+			if nav.target_reached:
+				see = true
+				$AnimationPlayer.play("Appear")
+				await  $AnimationPlayer.animation_finished
+				coll.set_deferred("disabled", false)
+				$Hurt.set_deferred('monitoring', true)
+				$Hit.set_deferred('monitoring', true)
+				self.state = State.Chase
+			else:
+				$AnimationPlayer.play("Warp")
+				see = false
+				await $AnimationPlayer.animation_finished
+				
+				coll.set_deferred("disabled", true)
+				$Hurt.set_deferred('monitoring', false)
+				$Hit.set_deferred('monitoring', false)
+				
+				var currPos: Vector2 = global_position
+				var nextPos: Vector2 = nav.get_next_path_position()
+				
+				velocity = currPos.direction_to(nextPos) * speed * delta * 10000
+				
+				move_and_slide()
 		
-		move_and_slide()
-	elif self.state == State.Chase:
-		coll.set_deferred("disabled", false)
-		
-		var currPos: Vector2 = global_position
-		var nextPos: Vector2 = nav.get_next_path_position()
-		
-		nav.target_position = adventurer.global_position
-		
-		velocity = currPos.direction_to(nextPos) * speed * delta
-		
-		move_and_slide()
+		State.Chase:
+			var currPos: Vector2 = global_position
+			var nextPos: Vector2 = nav.get_next_path_position()
+			
+			nav.target_position = adventurer.global_position
+			
+			velocity = currPos.direction_to(nextPos) * speed * delta
+			
+			move_and_slide()
 
 func _on_damage_component_attacked() -> void:
 	self.state = State.Hit
@@ -63,6 +76,7 @@ func runAway() -> void:
 func _on_health_component_defeat() -> void:
 	self.state = State.Defeat
 
-
-func _on_damage_component_2_damaged() -> void:
-	queue_free()
+func _on_damage_component_damaged() -> void:
+	self.state = State.Hit
+	var randomPos = NavigationServer2D.map_get_random_point(area.get_navigation_map(), 1, false)
+	nav.target_position = randomPos

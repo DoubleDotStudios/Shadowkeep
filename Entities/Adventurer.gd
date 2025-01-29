@@ -41,6 +41,8 @@ enum concernLevel {
 var concern: concernLevel = concernLevel.None
 
 func _ready() -> void:
+	$AnimationPlayer.play("RESET")
+	
 	match look:
 		1: sprite.frame = 0
 		2: sprite.frame = 1
@@ -133,10 +135,11 @@ func _on_far_body_exited(body: Node2D) -> void:
 	if body.is_in_group("Boss"):
 		concern = concernLevel.None
 		speed_mod = 1
-#endregion
-
 
 func _on_damage_component_damaged() -> void:
+	$AudioStreamPlayer2D.pitch_scale = randf_range(0.4, 1.9)
+	$AudioStreamPlayer2D.play()
 	$AnimationTree.active = false
 	$AnimationPlayer.call_deferred("play", "Hit")
 	$AnimationTree.active = true
+#endregion

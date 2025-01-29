@@ -4,6 +4,7 @@ extends CharacterBody2D
 @export_category("Data")
 @export var speed: float = 850
 @export var adventurer: Adventurer = null
+@export var area: NavigationRegion2D = null
 
 @onready var nav: NavigationAgent2D = $NavigationAgent2D
 
