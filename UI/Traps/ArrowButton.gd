@@ -27,6 +27,9 @@ func directionToVec(direction: Direction):
 
 func _on_pressed() -> void:
 	if usable:
+		$AudioStreamPlayer.pitch_scale = randf_range(0.4, 0.7)
+		$AudioStreamPlayer.play()
+		
 		var arrow = Arrow.instantiate()
 		arrow.direction = dir
 		arrow.global_position = $FirePoint.global_position
@@ -44,3 +47,11 @@ func _on_pressed() -> void:
 		
 		timer.queue_free()
 		usable = true
+
+func _on_mouse_entered() -> void:
+	active.visible = true
+	inactive.visible = false
+
+func _on_mouse_exited() -> void:
+	active.visible = false
+	inactive.visible = true

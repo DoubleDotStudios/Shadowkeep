@@ -4,7 +4,11 @@ extends Button
 @onready var inactive: NinePatchRect = $Inactive
 @onready var active: NinePatchRect = $Active
 
+@export var sfx: AudioStreamPlayer = null
+
 func _on_mouse_entered() -> void:
+	sfx.pitch_scale = randf_range(1.2, 1.7)
+	sfx.play()
 	active.visible = true
 	inactive.visible = false
 

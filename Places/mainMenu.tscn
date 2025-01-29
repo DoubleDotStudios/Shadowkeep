@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://83po1v5huom7"]
+[gd_scene load_steps=7 format=3 uid="uid://83po1v5huom7"]
 
 [ext_resource type="Script" path="res://UI/MenuButton.gd" id="1_01h32"]
 [ext_resource type="Script" path="res://Places/mainMenu.gd" id="1_ewdqq"]
 [ext_resource type="StyleBox" uid="uid://b4s6tgyaxwlsw" path="res://UI/ButtonStyle.tres" id="1_mkumx"]
 [ext_resource type="Texture2D" uid="uid://ejf2fl26jmia" path="res://Assets/Dungeon UI.png" id="1_wada8"]
+[ext_resource type="Texture2D" uid="uid://bqhbg62335ylu" path="res://Assets/Shadowkeep.png" id="5_0fx1c"]
+[ext_resource type="AudioStream" uid="uid://mb27ndff2he7" path="res://Sfx/Click.wav" id="6_m6ffg"]
 
 [node name="Main Menu" type="Control"]
 layout_mode = 3
@@ -23,6 +25,12 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.0941176, 0.0941176, 0.145098, 1)
 
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 288.0
+texture = ExtResource("5_0fx1c")
+
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
@@ -39,10 +47,10 @@ alignment = 1
 
 [node name="HSeparator2" type="HSeparator" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_constants/separation = 150
+theme_override_constants/separation = 200
 theme_override_styles/separator = ExtResource("1_mkumx")
 
-[node name="Start" type="Button" parent="HBoxContainer/VBoxContainer"]
+[node name="Start" type="Button" parent="HBoxContainer/VBoxContainer" node_paths=PackedStringArray("sfx")]
 custom_minimum_size = Vector2(412, 100)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -61,9 +69,11 @@ theme_override_styles/normal = ExtResource("1_mkumx")
 text = "Start"
 flat = true
 script = ExtResource("1_01h32")
+sfx = NodePath("../../../AudioStreamPlayer")
 metadata/_edit_group_ = true
 
 [node name="Inactive" type="NinePatchRect" parent="HBoxContainer/VBoxContainer/Start"]
+layout_mode = 0
 offset_right = 412.0
 offset_bottom = 100.0
 texture = ExtResource("1_wada8")
@@ -86,6 +96,7 @@ vertical_alignment = 1
 
 [node name="Active" type="NinePatchRect" parent="HBoxContainer/VBoxContainer/Start"]
 visible = false
+layout_mode = 0
 offset_right = 412.0
 offset_bottom = 100.0
 texture = ExtResource("1_wada8")
@@ -111,7 +122,7 @@ layout_mode = 2
 theme_override_constants/separation = 64
 theme_override_styles/separator = ExtResource("1_mkumx")
 
-[node name="Quit" type="Button" parent="HBoxContainer/VBoxContainer"]
+[node name="Quit" type="Button" parent="HBoxContainer/VBoxContainer" node_paths=PackedStringArray("sfx")]
 custom_minimum_size = Vector2(412, 100)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -129,9 +140,11 @@ theme_override_styles/normal_mirrored = ExtResource("1_mkumx")
 theme_override_styles/normal = ExtResource("1_mkumx")
 flat = true
 script = ExtResource("1_01h32")
+sfx = NodePath("../../../AudioStreamPlayer")
 metadata/_edit_group_ = true
 
 [node name="Inactive" type="NinePatchRect" parent="HBoxContainer/VBoxContainer/Quit"]
+layout_mode = 0
 offset_right = 412.0
 offset_bottom = 100.0
 texture = ExtResource("1_wada8")
@@ -153,6 +166,7 @@ vertical_alignment = 1
 
 [node name="Active" type="NinePatchRect" parent="HBoxContainer/VBoxContainer/Quit"]
 visible = false
+layout_mode = 0
 offset_right = 412.0
 offset_bottom = 100.0
 texture = ExtResource("1_wada8")
@@ -171,6 +185,10 @@ theme_override_font_sizes/font_size = 64
 text = "Quit"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_m6ffg")
+pitch_scale = 0.4
 
 [connection signal="button_down" from="HBoxContainer/VBoxContainer/Start" to="HBoxContainer/VBoxContainer/Start" method="_on_button_down"]
 [connection signal="button_up" from="HBoxContainer/VBoxContainer/Start" to="HBoxContainer/VBoxContainer/Start" method="_on_button_up"]

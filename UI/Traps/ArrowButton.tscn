@@ -4,9 +4,10 @@
 [ext_resource type="Script" path="res://UI/Traps/ArrowButton.gd" id="2_7l628"]
 [ext_resource type="Texture2D" uid="uid://popx14p3yawe" path="res://Assets/Booby Traps.png" id="3_mkvnq"]
 
-[node name="ArrowButton" instance=ExtResource("1_5ffah")]
+[node name="ArrowButton" node_paths=PackedStringArray("sfx") instance=ExtResource("1_5ffah")]
 script = ExtResource("2_7l628")
 direction = 2
+sfx = NodePath("AudioStreamPlayer")
 
 [node name="TextureRect" type="Sprite2D" parent="Inactive" index="0"]
 position = Vector2(3, 3)

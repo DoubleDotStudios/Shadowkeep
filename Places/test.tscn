@@ -126,6 +126,7 @@ offset_right = 80.0
 offset_bottom = 32.0
 direction = 3
 
-[node name="Wizard" parent="." node_paths=PackedStringArray("adventurer") instance=ExtResource("3_d6alj")]
+[node name="Wizard" parent="." node_paths=PackedStringArray("adventurer", "area") instance=ExtResource("3_d6alj")]
 position = Vector2(104, 48)
 adventurer = NodePath("../Adventurer")
+area = NodePath("../NavigationRegion2D")
